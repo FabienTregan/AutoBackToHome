@@ -1,0 +1,55 @@
+<html>
+    <head>
+
+        <style>
+            body {
+                background: tomato;
+                margin: 0px;
+            }
+            iframe {
+                border: none;
+                height: 100%;
+                width: 100%;
+            }
+        </style>
+
+    </head>
+
+    <body>
+        <iframe id="iframe" src="index.html"></iframe>
+        
+        <script>
+            // duration before going backto home, in ms
+            const DURATION = 5000
+            const DEBUG_MODE= false
+
+            var iframe = document.getElementById("iframe")
+            var indexUrl = iframe.src
+            var timeOutHandle = null;
+
+            function goBackHome() {
+                iframe.src = indexUrl
+                if(DEBUG_MODE) { console.log("Back Home !") }
+                resetTimeout()            
+            }
+
+            iframe.onclick = "console.log('reset!')"
+
+            function dontback() {
+                if(DEBUG_MODE) { console.log("ok, no back yet") }
+                resetTimeout()            
+            }
+
+            function resetTimeout() {
+                if(DEBUG_MODE) { console.log("Resetting timeout") }
+                window.clearTimeout(timeOutHandle)
+                timeOutHandle = window.setTimeout(goBackHome, DURATION)
+            }
+
+            resetTimeout()
+            document.documentElement.requestFullscreen()
+
+        </script>
+
+    </body>
+</html>
